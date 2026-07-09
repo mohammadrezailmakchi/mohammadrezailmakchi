@@ -1,0 +1,471 @@
+---
+// src/pages/projects.astro
+import Layout from '../layouts/Layout.astro';
+import { getTranslations } from '../utils/i18n';
+
+const lang = 'en';
+const t = getTranslations(lang);
+
+interface TechIndicator {
+  label: string;
+  value: string;
+}
+
+interface Project {
+  id: string;
+  title: string;
+  category: string;
+  filterCategory: string;
+  description: string;
+  tags: string[];
+  status: string;
+  indicators: TechIndicator[];
+  color: string;
+  colSpan: string;
+  githubUrl: string;
+  liveUrl: string;
+  svgPath: string;
+}
+
+const projects: Project[] = [
+  {
+    id: 'yakhchal-pz',
+    title: 'Yakhchal Paz',
+    category: 'Frontend-Backend Automation',
+    filterCategory: 'Full-Stack, Automation, Backend, Frontend',
+    description: 'An automated food inventory and meal preparation platform mapping recipes to available fridge content, utilizing high-performance server components and automated cloud operations.',
+    tags: ['Node.js', 'React Native', 'React PWA', 'Astro', 'Lira Clouding Service', 'MongoDB', 'Redis'],
+    status: 'Status: Operational',
+    indicators: [
+      { label: 'Platform Type', value: 'PWA & Native App' },
+      { label: 'Database Engine', value: 'MongoDB & Redis' },
+      { label: 'Hosting Cloud', value: 'Lira Clouding Service' },
+      { label: 'Runtime Env', value: 'Node.js & Astro' }
+    ],
+    color: '#F97316',
+    colSpan: 'md:col-span-2',
+    githubUrl: '#',
+    liveUrl: 'https://yakhchalpaz.ir',
+    svgPath: '<path d="M3 10h18v10a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V10z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M6 10V6a2 2 0 0 1 2-2h8a2 2 0 0 1 2 2v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10 14h4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
+  },
+  {
+    id: 'writedash',
+    title: 'WriteDash',
+    category: 'Full-Stack Application',
+    filterCategory: 'Full-Stack, Automation, Backend, Frontend',
+    description: 'An automated writing and productivity dash framework built with python and flet to orchestrate cross-platform interfaces and structured content outputs.',
+    tags: ['Python', 'Flet'],
+    status: 'Pipeline: Verified',
+    indicators: [
+      { label: 'UI Engine', value: 'Flet (Flutter UI)' },
+      { label: 'Backend System', value: 'Python Core' },
+      { label: 'Compatibility', value: 'Cross-Platform' },
+      { label: 'Execution Model', value: 'Desktop & Web' }
+    ],
+    color: '#8B5CF6',
+    colSpan: 'md:col-span-1',
+    githubUrl: '#',
+    liveUrl: '#',
+    svgPath: '<path d="M12 20h9M16.5 3.5a2.121 2.121 0 0 1 3 3L7 19l-4 1 1-4L16.5 3.5z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+  },
+  {
+    id: 'soundtaps',
+    title: 'SoundTaps',
+    category: 'Frontend Sound Interface',
+    filterCategory: 'Frontend',
+    description: 'An interactive browser-based spatial sound synthesizer. Coordinates touch and mouse events on a clean UI, mapping coordinates to multi-node real-time oscillators.',
+    tags: ['Python', 'Flet', 'Flutter'],
+    status: 'Status: Operational',
+    indicators: [
+      { label: 'UI Engine', value: 'Flet & Flutter' },
+      { label: 'Core Language', value: 'Python' },
+      { label: 'Layout Model', value: 'Frontend Interface' },
+      { label: 'Render Pipeline', value: 'GPU Accelerated' }
+    ],
+    color: '#10B981',
+    colSpan: 'md:col-span-1',
+    githubUrl: '#',
+    liveUrl: '#',
+    svgPath: '<path d="M12 2v20M17 5v12M22 9v6M7 7v10M2 10v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/>'
+  },
+  {
+    id: 'havapp',
+    title: 'HavApp',
+    category: 'Full-Stack Application',
+    filterCategory: 'Full-Stack, Automation, Backend, Frontend',
+    description: 'A lightweight environmental widgets dashboard optimized for local networks. Displays environmental air indexing, weather updates, and transportation status feeds.',
+    tags: ['Flutter'],
+    status: 'Status: Operational',
+    indicators: [
+      { label: 'UI Engine', value: 'Flutter Framework' },
+      { label: 'System Architecture', value: 'Full-Stack' },
+      { label: 'Code Delivery', value: 'Single Codebase' },
+      { label: 'API Integrator', value: 'REST Endpoints' }
+    ],
+    color: '#06B6D4',
+    colSpan: 'md:col-span-2',
+    githubUrl: '#',
+    liveUrl: '#',
+    svgPath: '<circle cx="12" cy="12" r="5" stroke="currentColor" stroke-width="1.5" fill="none"/><path d="M12 1v2M12 21v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>'
+  },
+  {
+    id: 'yakhchal-admin',
+    title: 'YakhchalPaz Admin Panel',
+    category: 'Administrative Suite',
+    filterCategory: 'Full-Stack, Automation, Backend, Frontend',
+    description: 'An internal administrative back-office panel orchestrating fridge data metrics, user accounts, and server telemetry for the Yakhchalpaz ecosystem.',
+    tags: ['Node.js', 'React', 'MongoDB', 'Tailwind CSS'],
+    status: 'Status: Operational',
+    indicators: [
+      { label: 'Stack Model', value: 'Full-Stack Node' },
+      { label: 'Database Client', value: 'Mongoose ODM' },
+      { label: 'Telemetry Link', value: 'WebSocket Sync' },
+      { label: 'Access Level', value: 'Admin Only' }
+    ],
+    color: '#EF4444',
+    colSpan: 'md:col-span-1',
+    githubUrl: '#',
+    liveUrl: '#',
+    svgPath: '<rect x="3" y="11" width="18" height="10" rx="2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" fill="none"/><circle cx="12" cy="16" r="1.5" fill="currentColor"/>'
+  },
+  {
+    id: 'yakhchal-studio',
+    title: 'YakhchalPaz Studio',
+    category: 'Content Engine & Marketing Hub',
+    filterCategory: 'Automation',
+    description: 'Yakhchalpaz Studio is the specialized content engine and social marketing hub for the ecosystem. It serves as the primary system where promotional video scripts, social media media campaigns, and marketing strategies are produced, while comprehensively tracking, modeling, and analyzing all audience engagement metrics and social growth KPIs.',
+    tags: ['Python', 'Node.js', 'Analytics API', 'Metrics Tracker'],
+    status: 'Status: Operational',
+    indicators: [
+      { label: 'Core Engine', value: 'Content Scheduler' },
+      { label: 'Channel Coverage', value: 'Multi-Platform' },
+      { label: 'Analytics Sync', value: 'KPI Webhooks' },
+      { label: 'Metrics Tracked', value: 'Engagement & Growth' }
+    ],
+    color: '#3B82F6',
+    colSpan: 'md:col-span-1',
+    githubUrl: '#',
+    liveUrl: '#',
+    svgPath: '<path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>'
+  }
+];
+
+const translatedProjects = lang === 'fa' ? [
+  {
+    ...projects[0],
+    title: 'یخچال پز (Yakhchal Paz)',
+    category: 'اتوماسیون فرانت‌اند و بک‌اند',
+    description: 'یک پلتفرم خودکار مدیریت موجودی مواد غذایی و پیشنهاد غذا بر اساس محتوای یخچال، توسعه‌یافته با معماری مدرن ابری و اتصال داده بک‌اند.',
+    status: 'وضعیت: فعال و پایدار',
+    indicators: [
+      { label: 'نوع پلتفرم', value: 'PWA و اپلیکیشن بومی' },
+      { label: 'موتور پایگاه‌داده', value: 'MongoDB و Redis' },
+      { label: 'میزبانی ابری', value: 'Lira Clouding Service' },
+      { label: 'محیط اجرا', value: 'Node.js و Astro' }
+    ]
+  },
+  {
+    ...projects[1],
+    title: 'WriteDash',
+    category: 'فول‌استک (فرانت‌اند و بک‌اند)',
+    description: 'داشبورد خودکار نویسندگی و سازمان‌دهی محتوا مبتنی بر فریم‌ورک Flet پایتون برای مدیریت رابط کاربری چندسکویی.',
+    status: 'پایپ‌لاین: تأییدشده',
+    indicators: [
+      { label: 'موتور رابط کاربری', value: 'Flet (رابط کاربری Flutter)' },
+      { label: 'سیستم بک‌اند', value: 'هسته پایتون' },
+      { label: 'سازگاری', value: 'چندسکویی' },
+      { label: 'مدل اجرا', value: 'دسکتاپ و وب' }
+    ]
+  },
+  {
+    ...projects[2],
+    title: 'SoundTaps',
+    category: 'رابط فرانت‌اند صوتی تعاملی',
+    description: 'یک سینت‌سایزر صوتی تعاملی تحت وب مبتنی بر پایتون و فلاتر. رویدادهای لمسی را به نوسان‌سازهای زمان واقعی متصل می‌کند.',
+    status: 'وضعیت: فعال و پایدار',
+    indicators: [
+      { label: 'موتور رابط کاربری', value: 'Flet و Flutter' },
+      { label: 'زبان برنامه‌نویسی', value: 'پایتون' },
+      { label: 'حوزه توسعه', value: 'رابط کاربری فرانت‌‌اند' },
+      { label: 'پایپ‌لاین رندر', value: 'شتاب‌دهی گرافیکی' }
+    ]
+  },
+  {
+    ...projects[3],
+    title: 'HavApp',
+    category: 'فول‌استک (فرانت‌اند و بک‌اند)',
+    description: 'داشبورد ابزارک‌های محیطی سبک بهینه‌شده برای شبکه‌های محلی، ساخته شده با فلاتر برای ردیابی زنده شاخص‌ها.',
+    status: 'وضعیت: فعال و پایدار',
+    indicators: [
+      { label: 'موتور رابط کاربری', value: 'فریم‌ورک Flutter' },
+      { label: 'معماری سیستم', value: 'فول‌استک' },
+      { label: 'تحویل کد', value: 'مخزن داده واحد' },
+      { label: 'اتصال داده', value: 'APIهای REST' }
+    ]
+  },
+  {
+    ...projects[4],
+    title: 'پنل مدیریت یخچال پز',
+    category: 'پنل اداری و مدیریت بک‌باکس',
+    description: 'پنل مدیریت داخلی یکپارچه برای مانیتورینگ متریک‌های سیستم، حساب‌های کاربری و تله‌متری سرورهای پلتفرم یخچال پز.',
+    status: 'وضعیت: فعال و پایدار',
+    indicators: [
+      { label: 'ساختار فنی', value: 'نود تمام‌پشته' },
+      { label: 'کلاینت داده', value: 'Mongoose ODM' },
+      { label: 'تبادل زنده', value: 'اتصال WebSocket' },
+      { label: 'سطح دسترسی', value: 'فقط ادمین' }
+    ]
+  },
+  {
+    ...projects[5],
+    title: 'یخچال پز استودیو (Studio)',
+    category: 'هاب بازاریابی و تولید محتوا',
+    description: 'یخچالپز استودیو بازوی تخصصی تولید محتوا و هاب بازاریابی اجتماعی این اکوسیستم است. این بخش به عنوان بستر اصلی تدوین سناریوهای ویدئویی، کمپینهای رسانهای و استراتژیهای مارکتینگ عمل کرده و به طور جامع تمام شاخصهای کلیدی عملکرد (KPI) و متریکهای تحلیلی رشد و تعامل مخاطبان را مدلسازی و بررسی میکند.',
+    status: 'وضعیت: فعال و پایدار',
+    indicators: [
+      { label: 'موتور اصلی', value: 'زمان‌بندی محتوا' },
+      { label: 'پوشش کانال', value: 'چندسکویی' },
+      { label: 'همگام‌ساز تحلیل', value: 'وب‌هووک‌های KPI' },
+      { label: 'شاخص‌های ردیابی', value: 'تعامل و رشد' }
+    ]
+  }
+] : projects;
+
+const categories = lang === 'fa' ? [
+  { label: 'همه', value: 'All' },
+  { label: 'فول‌استک', value: 'Full-Stack' },
+  { label: 'فرانت‌اند', value: 'Frontend' },
+  { label: 'بک‌اند', value: 'Backend' },
+  { label: 'اتوماسیون', value: 'Automation' }
+] : [
+  { label: 'All', value: 'All' },
+  { label: 'Full-Stack', value: 'Full-Stack' },
+  { label: 'Frontend', value: 'Frontend' },
+  { label: 'Backend', value: 'Backend' },
+  { label: 'Automation', value: 'Automation' }
+];
+---
+
+<Layout title="Products Showcase | Full-Stack Founder" activePath="/projects" lang={lang} description="Spacious Bento-box grid mapping technical metrics, live telemetry status, and stack details.">
+  <main class="relative z-10 w-full min-h-screen flex flex-col items-center px-6 sm:px-12 md:px-16 pt-24 md:pt-28 pb-24">
+    
+    <!-- Header Block -->
+    <div class="w-full max-w-7xl text-left mb-16 space-y-6 animate-fade-in">
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-zinc-200 dark:border-slate-900 bg-zinc-150/40 dark:bg-slate-900/10 text-zinc-650 dark:text-slate-400 text-[10px] font-bold uppercase tracking-widest select-none">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-650 dark:bg-indigo-400"></span>
+        {t.projects.tag}
+      </div>
+      <h1 class="text-4xl sm:text-6xl font-black tracking-tight text-zinc-900 dark:text-white font-display uppercase">
+        {t.projects.title}
+      </h1>
+      <p class="text-zinc-550 dark:text-slate-400 text-sm sm:text-base max-w-xl leading-relaxed font-light">
+        {t.projects.subtitle}
+      </p>
+    </div>
+
+    <!-- Search and Filter Bar -->
+    <div class="w-full max-w-7xl mb-12 flex flex-col sm:flex-row gap-6 items-center justify-between border-b border-zinc-200/60 dark:border-slate-900/60 pb-8 animate-fade-in">
+      <!-- Categories tabs -->
+      <div class="flex flex-wrap gap-2 w-full sm:w-auto">
+        {categories.map((cat) => (
+          <button
+            data-category={cat.value}
+            class={`category-tab px-4 py-1.5 sm:px-5 sm:py-2 rounded-full text-[10px] font-bold uppercase tracking-widest transition-all duration-300 cursor-pointer ${
+              cat.value === 'All'
+                ? 'bg-zinc-900 text-white dark:bg-white dark:text-slate-950 shadow-sm border border-transparent'
+                : 'text-zinc-550 hover:text-zinc-900 dark:text-slate-400 dark:hover:text-white border border-transparent hover:border-zinc-200 dark:hover:border-slate-850'
+            }`}
+          >
+            {cat.label}
+          </button>
+        ))}
+      </div>
+
+      <!-- Search Input -->
+      <div class="relative w-full sm:w-80">
+        <span class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-zinc-400 dark:text-slate-600">
+          <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+          </svg>
+        </span>
+        <input
+          type="text"
+          id="project-search"
+          placeholder={t.projects.search_placeholder}
+          class="w-full pl-10 pr-4 py-2.5 bg-white/60 dark:bg-slate-950/40 text-xs text-zinc-850 dark:text-slate-200 placeholder-zinc-400 dark:placeholder-slate-600 rounded-full border border-zinc-200 dark:border-slate-900 focus:outline-none focus:border-indigo-650 dark:focus:border-indigo-500 focus:ring-1 focus:ring-indigo-650/10 transition-all duration-300"
+        />
+      </div>
+    </div>
+
+    <!-- Bento Box Grid (spacious, asymmetrical arrangement) -->
+    <div id="projects-grid" class="w-full max-w-7xl grid grid-cols-1 md:grid-cols-3 gap-8 grid-flow-row-dense">
+      {translatedProjects.map((project) => (
+        <div
+          data-name={project.title.toLowerCase()}
+          data-category={project.filterCategory}
+          class="project-card group relative overflow-hidden backdrop-acrylic p-8 sm:p-10 rounded-3xl border border-slate-900/5 dark:border-slate-900/15 transition-all duration-500 hover:scale-[1.01] hover:-translate-y-1 hover:shadow-xl hover:shadow-zinc-200/5 dark:hover:shadow-none flex flex-col justify-between min-h-[420px] md:col-span-1"
+          style={project.colSpan === 'md:col-span-2' ? 'grid-column: span 2 / span 2;' : ''}
+        >
+          <!-- Faint Active Hover Border Highlight -->
+          <div class="absolute inset-0 rounded-3xl border border-transparent group-hover:border-indigo-500/10 dark:group-hover:border-indigo-400/10 pointer-events-none transition-colors duration-300"></div>
+
+          <!-- Upper Content -->
+          <div class="space-y-6 relative z-10">
+            <div class="flex items-center justify-between">
+              <span class="text-[9px] font-bold uppercase tracking-widest px-3 py-1 bg-zinc-150/40 dark:bg-slate-950/60 border border-zinc-200/50 dark:border-slate-850/50 rounded-lg text-zinc-500 dark:text-slate-400">
+                {project.category}
+              </span>
+              
+              <!-- Repo Link icons -->
+              <div class="flex items-center gap-3 text-zinc-400 dark:text-slate-655">
+                {project.githubUrl !== '#' && (
+                  <a href={project.githubUrl} class="hover:text-zinc-900 dark:hover:text-white transition-colors duration-250" aria-label="GitHub Repository">
+                    <svg class="w-4.5 h-4.5" fill="currentColor" viewBox="0 0 24 24">
+                      <path fill-rule="evenodd" clip-rule="evenodd" d="M12 2C6.477 2 2 6.484 2 12.017c0 4.425 2.865 8.18 6.839 9.504.5.092.682-.217.682-.483 0-.237-.008-.868-.013-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.029-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.202 2.398.1 2.651.64.7 1.028 1.595 1.028 2.688 0 3.848-2.339 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482C19.138 20.193 22 16.44 22 12.017 22 6.484 17.522 2 12 2z"/>
+                    </svg>
+                  </a>
+                )}
+                {project.liveUrl !== '#' && (
+                  <a href={project.liveUrl} class="hover:text-zinc-900 dark:hover:text-white transition-colors duration-250" aria-label="Live Demo" target="_blank" rel="noopener noreferrer">
+                    <svg class="w-4.5 h-4.5" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" viewBox="0 0 24 24">
+                      <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6M15 3h6v6M10 14L21 3" />
+                    </svg>
+                  </a>
+                )}
+              </div>
+            </div>
+
+            <!-- Title -->
+            <div class="flex items-center gap-4">
+              <div style={`background: ${project.color}10; color: ${project.color}; border: 1px solid ${project.color}20;`} class="w-10 h-10 rounded-xl flex items-center justify-center">
+                <svg class="w-5.5 h-5.5" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <Fragment set:html={project.svgPath} />
+                </svg>
+              </div>
+              <h2 class="text-xl sm:text-2xl font-light text-zinc-900 dark:text-white flex items-center gap-2 font-display">
+                {project.title}
+              </h2>
+            </div>
+
+            <!-- Description -->
+            <p class="text-zinc-550 dark:text-slate-400 text-xs sm:text-sm leading-relaxed font-light">
+              {project.description}
+            </p>
+          </div>
+
+          <!-- Lower Content -->
+          <div class="mt-8 space-y-6 relative z-10">
+            
+            <!-- Tech tags (soft typography, border-less, 2px hover shift accent) -->
+            <div class="flex flex-wrap gap-x-4.5 gap-y-2 border-b border-slate-900/5 dark:border-slate-900/10 pb-5">
+              {project.tags.map((tag) => (
+                <span class="group relative text-[10px] font-semibold text-zinc-500 dark:text-slate-455 hover:text-indigo-655 dark:hover:text-indigo-400 cursor-default transition-all duration-300 transform hover:-translate-y-[2px] select-none py-0.5">
+                  {tag}
+                  <span class="absolute bottom-0 left-0 w-0 h-[1.5px] bg-indigo-650 dark:bg-indigo-400 transition-all duration-300 group-hover:w-full"></span>
+                </span>
+              ))}
+            </div>
+
+            <!-- Honest Telemetry Block -->
+            <div class="grid grid-cols-2 gap-4 p-5 bg-zinc-50/50 dark:bg-slate-950/40 rounded-2xl border border-slate-900/5 dark:border-slate-900/10">
+              {project.indicators.map((ind) => (
+                <div class="flex flex-col">
+                  <span class="text-[9px] text-zinc-450 dark:text-slate-500 font-bold uppercase tracking-widest">{ind.label}</span>
+                  <span class="text-xs font-semibold text-zinc-700 dark:text-slate-350 mt-0.5">{ind.value}</span>
+                </div>
+              ))}
+            </div>
+
+            <!-- Systemic Status & Metric inspector link -->
+            <div class="pt-2 flex justify-between items-center w-full">
+              <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-650 dark:text-indigo-400">
+                {project.status}
+              </span>
+              {project.liveUrl !== '#' && (
+                <a href={lang === 'fa' ? `/fa/projects/${project.id}` : `/projects/${project.id}`} class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 dark:text-slate-500 dark:hover:text-white transition-colors duration-300 flex items-center gap-1 group/link">
+                  {t.projects.inspect_metrics}
+                  <svg class="w-2.5 h-2.5 transform group-hover/link:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
+                  </svg>
+                </a>
+              )}
+            </div>
+
+          </div>
+        </div>
+      ))}
+    </div>
+
+  </main>
+</Layout>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(12px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>
+
+<script is:inline>
+  document.addEventListener('DOMContentLoaded', () => {
+    const cards = document.querySelectorAll('.project-card');
+    const categoryTabs = document.querySelectorAll('.category-tab');
+    const searchInput = document.getElementById('project-search');
+
+    let activeFilter = 'All';
+    let searchQuery = '';
+
+    function filterProjects() {
+      cards.forEach((card) => {
+        const cardCategory = card.getAttribute('data-category') || '';
+        const cardName = card.getAttribute('data-name');
+
+        const cardCategories = cardCategory.split(',').map(c => c.trim());
+        const matchesCategory = activeFilter === 'All' || cardCategories.includes(activeFilter);
+        const matchesSearch = cardName.includes(searchQuery);
+
+        if (matchesCategory && matchesSearch) {
+          card.style.display = 'flex';
+          setTimeout(() => {
+            card.style.opacity = '1';
+            card.style.transform = 'scale(1) translateY(0)';
+          }, 10);
+        } else {
+          card.style.opacity = '0';
+          card.style.transform = 'scale(0.98) translateY(4px)';
+          setTimeout(() => {
+            if (card.style.opacity === '0') {
+              card.style.display = 'none';
+            }
+          }, 150);
+        }
+      });
+    }
+
+    categoryTabs.forEach((tab) => {
+      tab.addEventListener('click', () => {
+        // Toggle Active styles
+        categoryTabs.forEach((t) => {
+          t.classList.remove('bg-zinc-900', 'text-white', 'dark:bg-white', 'dark:text-slate-950', 'shadow-sm');
+          t.classList.add('text-zinc-550', 'dark:text-slate-400');
+        });
+
+        tab.classList.add('bg-zinc-900', 'text-white', 'dark:bg-white', 'dark:text-slate-950', 'shadow-sm');
+        tab.classList.remove('text-zinc-550', 'dark:text-slate-400');
+
+        activeFilter = tab.getAttribute('data-category');
+        filterProjects();
+      });
+    });
+
+    if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+        searchQuery = e.target.value.toLowerCase().trim();
+        filterProjects();
+      });
+    }
+  });
+</script>

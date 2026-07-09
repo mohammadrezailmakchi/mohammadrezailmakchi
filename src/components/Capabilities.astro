@@ -1,0 +1,232 @@
+---
+import { getTranslations } from '../utils/i18n';
+
+interface Props {
+  lang?: 'en' | 'fa';
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getTranslations(lang);
+
+interface TechSpec {
+  label: string;
+  value: string;
+}
+
+interface SkillPanel {
+  title: string;
+  extendedDescription: string;
+  color: string;
+  features: string[];
+  metric: string;
+  svgPath: string;
+  specs: TechSpec[];
+}
+
+const skillPanels: SkillPanel[] = [
+  {
+    title: 'Frontend Architecture',
+    extendedDescription: 'Mastering modern browser delivery through islands-architecture, asset lazy-loading, and semantic DOM layouts. I design scalable CSS styling systems using Tailwind design tokens and optimize core web vitals to target 100/100 Lighthouse performance.',
+    color: '#38BDF8', // Cyan/Sky
+    features: ['Astro Islands', 'React Dynamic Components', 'Tailwind Design Tokens', 'SEO Best Practices'],
+    metric: 'Lighthouse Performance: 100',
+    svgPath: '<path d="M4 6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6z" stroke="currentColor" stroke-width="1.8" fill="none"/><path d="M4 10h16M9 10v10" stroke="currentColor" stroke-width="1.8"/>',
+    specs: [
+      { label: 'Astro Core', value: 'v7.0 Stable' },
+      { label: 'Hydration', value: 'Client Idle/Visible' },
+      { label: 'Layouts', value: 'Asymmetrical Grid' },
+      { label: 'Typography', value: 'Outfit / Inter' }
+    ]
+  },
+  {
+    title: 'Backend Systems',
+    extendedDescription: 'Building robust server runtimes and databases designed for stability under concurrent request loads. I construct optimized schema indexes, write fast transactional queries, manage database pooling, and implement memory caches to keep response times under 12ms.',
+    color: '#8B5CF6', // Purple
+    features: ['PostgreSQL Schema Design', 'Singleton DB Connections', 'FastAPI Webhooks', 'Redis Caching Tiers'],
+    metric: 'Engine Latency: <12ms',
+    svgPath: '<path d="M4 5a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V5zM4 15a1 1 0 0 1 1-1h14a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1v-3z" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="8" cy="6.5" r="1" fill="currentColor"/><circle cx="8" cy="16.5" r="1" fill="currentColor"/><path d="M12 6.5h4M12 16.5h4" stroke="currentColor" stroke-width="1.8"/>',
+    specs: [
+      { label: 'Runtime', value: 'FastAPI / Node.js' },
+      { label: 'Database', value: 'PostgreSQL' },
+      { label: 'Caching Tiers', value: 'Redis Cache' },
+      { label: 'API Structure', value: 'RESTful / Webhooks' }
+    ]
+  },
+  {
+    title: 'Automation & DevOps',
+    extendedDescription: 'Creating pipeline workflows that remove manual work and guarantee environmental consistency. I automate validation, test runs, and container builds via GitHub Actions, deploy securely via containerization, and manage environment secrets safely.',
+    color: '#10B981', // Emerald
+    features: ['GitHub Actions Workflows', 'Docker Containerization', 'Python Script Pipelines', 'Decrypted Env Management'],
+    metric: 'Pipeline Deploy Time: <90s',
+    svgPath: '<path d="M6 18V6a3 3 0 0 1 3-3h6M18 6v12a3 3 0 0 1-3 3H9" stroke="currentColor" stroke-width="1.8" fill="none" stroke-linecap="round"/><circle cx="6" cy="18" r="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="18" cy="6" r="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="9" cy="3" r="2.5" stroke="currentColor" stroke-width="1.8" fill="none"/>',
+    specs: [
+      { label: 'CI/CD Host', value: 'GitHub Actions' },
+      { label: 'Container', value: 'Docker Engine' },
+      { label: 'Deployment', value: 'Vercel / Cloudflare' },
+      { label: 'Secret Vault', value: 'Decrypted Env' }
+    ]
+  },
+  {
+    title: 'Interactive Experiences',
+    extendedDescription: 'Developing spatial web audio engines and custom visual canvases that bring interfaces to life. I script game loops, coordinate layout animations, and map mouse/touch interactions to multi-node real-time sound oscillators.',
+    color: '#F57C24', // Orange
+    features: ['Web Audio Oscillators', 'HTML5 Canvas Rendering', 'Godot Node Structures', 'C# Game Loops'],
+    metric: 'Spatial Synthesizer: 60fps',
+    svgPath: '<path d="M3 12h3l3-9 4 18 4-13 3 4h4" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/>',
+    specs: [
+      { label: 'Audio APIs', value: 'Web Audio API' },
+      { label: 'Graphics', value: 'HTML5 Canvas 2D' },
+      { label: 'Frame Rate', value: '60 FPS Target' },
+      { label: 'Language', value: 'TypeScript / C#' }
+    ]
+  }
+];
+
+const translatedSkillPanels = lang === 'fa' ? [
+  {
+    title: 'معماری فرانت‌اند',
+    extendedDescription: 'تسلط بر تحویل مدرن مرورگر از طریق معماری جزیره‌ها، بارگذاری تنبل دارایی‌ها و چیدمان‌های معنایی DOM. من سیستم‌های استایل‌دهی مقیاس‌پذیر CSS را با استفاده از توکن‌های طراحی Tailwind طراحی می‌کنم و معیارهای اصلی وب را برای کسب امتیاز عملکرد ۱۰۰/۱۰۰ لایت‌هاوس بهینه‌سازی می‌کنم.',
+    color: '#38BDF8',
+    features: ['جزایر استرو (Astro Islands)', 'کامپوننت‌های داینامیک React', 'توکن‌های طراحی Tailwind', 'بهترین روش‌های سئو (SEO)'],
+    metric: 'عملکرد لایت‌هاوس: ۱۰۰',
+    svgPath: skillPanels[0].svgPath,
+    specs: [
+      { label: 'هسته استرو', value: 'نسخه پایدار v7.0' },
+      { label: 'هیدراسیون', value: 'حالت Idle/Visible کلاینت' },
+      { label: 'چیدمان‌ها', value: 'شبکه نامتقارن' },
+      { label: 'تایپوگرافی', value: 'Vazirmatn' }
+    ]
+  },
+  {
+    title: 'سیستم‌های بک‌اند',
+    extendedDescription: 'ساخت موتورها و پایگاه‌های داده قدرتمند سرور که برای پایداری در بار درخواست‌های همزمان طراحی شده‌اند. من ایندکس‌های بهینه‌شده طرح‌واره را می‌سازم، کوئری‌های تراکنشی سریع می‌نویسم، استخر اتصالات پایگاه‌داده را مدیریت می‌کنم و لایه‌های کش حافظه را برای نگه داشتن زمان پاسخ‌دهی زیر ۱۲ میلی‌ثانیه پیاده‌سازی می‌کنم.',
+    color: '#8B5CF6',
+    features: ['طراحی طرح‌واره PostgreSQL', 'اتصالات تک‌نمونه پایگاه‌داده', 'وب‌هووک‌های FastAPI', 'لایه‌های کشینگ Redis'],
+    metric: 'تاخیر موتور: کمتر از ۱۲ میلی‌ثانیه',
+    svgPath: skillPanels[1].svgPath,
+    specs: [
+      { label: 'محیط اجرا', value: 'FastAPI / Node.js' },
+      { label: 'پایگاه‌داده', value: 'PostgreSQL' },
+      { label: 'لایه‌های کش', value: 'کش Redis' },
+      { label: 'ساختار API', value: 'RESTful / وب‌هووک‌ها' }
+    ]
+  },
+  {
+    title: 'اتوماسیون و دواپس',
+    extendedDescription: 'ایجاد جریان‌های کاری پایپ‌لاین که کارهای دستی را حذف کرده و یکنواختی محیط استقرار را تضمین می‌کنند. من اعتبارسنجی، اجرای تست‌ها و ساخت کانتینرها را از طریق GitHub Actions خودکار می‌کنم، استقرارها را به صورت ایمن از طریق کانتینری‌سازی مدیریت می‌کنم و متغیرهای محیطی را به صورت ایمن رمزگشایی می‌کنم.',
+    color: '#10B981',
+    features: ['جریان‌های کاری GitHub Actions', 'کانتینری‌سازی Docker', 'پایپ‌لاین‌های اسکریپت پایتون', 'کلیدهای محیطی رمزگشایی شده'],
+    metric: 'زمان استقرار پایپ‌لاین: کمتر از ۹۰ ثانیه',
+    svgPath: skillPanels[2].svgPath,
+    specs: [
+      { label: 'میزبان CI/CD', value: 'GitHub Actions' },
+      { label: 'کانتینر', value: 'Docker Engine' },
+      { label: 'محیط استقرار', value: 'Vercel / Cloudflare' },
+      { label: 'مخزن کلیدها', value: 'کلیدهای محیطی رمزگذاری شده' }
+    ]
+  },
+  {
+    title: 'تجربه‌های تعاملی',
+    extendedDescription: 'توسعه موتورهای صوتی سه‌بعدی تحت وب و بوم‌های بصری سفارشی که رابط‌ها را زنده می‌کنند. من حلقه‌های بازی را اسکریپت می‌کنم، انیمیشن‌های چیدمان را هماهنگ می‌کنم و تعاملات ماوس/لمس را با نوسان‌سازهای صوتی چندگره‌ای در زمان واقعی نقشه‌ربداری می‌کنم.',
+    color: '#F57C24',
+    features: ['نوسان‌سازهای وب‌آدیو', 'رندرینگ بوم HTML5 Canvas', 'ساختار گره‌های Godot', 'حلقه‌های بازی سی‌شارپ'],
+    metric: 'سینت‌سایزر صوتی: ۶۰ فریم بر ثانیه',
+    svgPath: skillPanels[3].svgPath,
+    specs: [
+      { label: 'ای‌پی‌آی‌های صوتی', value: 'Web Audio API' },
+      { label: 'گرافیک', value: 'HTML5 Canvas 2D' },
+      { label: 'نرخ فریم', value: 'هدف ۶۰ فریم بر ثانیه' },
+      { label: 'زبان‌ها', value: 'TypeScript / C#' }
+    ]
+  }
+] : skillPanels;
+---
+<!-- Section 1: Detailed Skill Catalog Stacking Cards -->
+<section class="w-full max-w-5xl mx-auto px-6 sm:px-12 md:px-16 py-24 space-y-24 border-t border-zinc-200/60 dark:border-slate-900/60">
+  <div class="space-y-4">
+    <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-zinc-200 dark:border-slate-900 bg-zinc-150/40 dark:bg-slate-900/10 text-zinc-650 dark:text-slate-400 text-[10px] font-bold uppercase tracking-widest select-none">
+      <span class="w-1.5 h-1.5 rounded-full bg-indigo-650 dark:bg-indigo-400"></span>
+      {t.capabilities.tag}
+    </div>
+    <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white font-display uppercase">
+      {t.capabilities.title}
+    </h2>
+    <p class="text-zinc-550 dark:text-slate-400 text-sm sm:text-base max-w-xl leading-relaxed font-light">
+      {t.capabilities.subtitle}
+    </p>
+  </div>
+
+  <!-- Sticky Stacking Cards Container -->
+  <div class="relative w-full space-y-12 lg:space-y-24">
+    {translatedSkillPanels.map((panel, idx) => (
+      <div
+        class="capabilities-card sticky w-full backdrop-acrylic rounded-[2rem] md:rounded-[2.5rem] border border-slate-900/5 dark:border-slate-900/15 p-6 md:p-12 shadow-2xl shadow-slate-900/5 dark:shadow-none flex flex-col md:flex-row gap-6 md:gap-8 items-stretch min-h-[380px] md:min-h-[440px] transition-all duration-300"
+        style={`--card-top-desktop: calc(96px + ${idx} * 28px); --card-top-mobile: calc(68px + ${idx} * 16px); margin-bottom: ${ (translatedSkillPanels.length - 1 - idx) * 12 }px; z-index: ${idx + 10};`}
+      >
+        <!-- Left Column: Narrative & Features -->
+        <div class="flex-1 flex flex-col justify-between space-y-6 md:space-y-8">
+          <div class="space-y-4 md:space-y-6">
+            <!-- Header with Icon & Specialty -->
+            <div class="flex items-center gap-4 md:gap-5">
+              <div class="w-12 h-12 md:w-14 md:h-14 rounded-xl md:rounded-2xl flex items-center justify-center border border-slate-900/5 dark:border-slate-900/15 shrink-0" style={`background: ${panel.color}15; color: ${panel.color};`}>
+                <svg class="w-6 h-6 md:w-7 md:h-7" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                  <Fragment set:html={panel.svgPath} />
+                </svg>
+              </div>
+              <div>
+                <span class="text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-zinc-400 dark:text-slate-500 block">{lang === 'fa' ? 'حوزه اصلی' : 'Core Area'}</span>
+                <h3 class="text-xl md:text-3xl font-black tracking-tight text-zinc-900 dark:text-white font-display uppercase">{panel.title}</h3>
+              </div>
+            </div>
+
+            <!-- Detailed Text description -->
+            <p class="text-zinc-550 dark:text-slate-455 text-xs sm:text-sm md:text-base leading-relaxed font-light max-w-2xl">
+              {panel.extendedDescription}
+            </p>
+          </div>
+
+          <!-- Soft Tags -->
+          <div class="flex flex-wrap gap-1.5 md:gap-2 pt-2 md:pt-4">
+            {panel.features.map((feat) => (
+              <span class="text-[8px] md:text-[9px] font-bold uppercase tracking-wider px-2.5 py-1.5 md:px-3.5 md:py-2 rounded-lg md:rounded-xl bg-zinc-50 dark:bg-zinc-900/40 border border-slate-900/5 dark:border-slate-900/15 text-zinc-650 dark:text-slate-400">
+                {feat}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <!-- Right Column: Specs & Telemetry -->
+        <div class="w-full md:w-80 shrink-0 flex flex-col justify-center">
+          <div class="p-5 md:p-6 bg-zinc-50/50 dark:bg-slate-950/40 rounded-[1.5rem] md:rounded-3xl border border-slate-900/5 dark:border-slate-900/10 space-y-4 md:space-y-5">
+            <div>
+              <span class="text-[8px] md:text-[9px] text-zinc-455 dark:text-slate-500 font-bold uppercase tracking-widest block">{lang === 'fa' ? 'تله‌متری سیستم' : 'System Telemetry'}</span>
+              <span class="text-lg md:text-xl font-bold text-zinc-800 dark:text-slate-200 mt-0.5 block">{panel.metric}</span>
+            </div>
+
+            <div class="pt-3 md:pt-4 border-t border-slate-900/5 dark:border-slate-900/10 space-y-2.5 md:space-y-3">
+              <span class="text-[8px] md:text-[9px] text-zinc-455 dark:text-slate-500 font-bold uppercase tracking-widest block">{lang === 'fa' ? 'مشخصات پلتفرم' : 'Platform Specs'}</span>
+              {panel.specs.map((spec) => (
+                <div class="flex justify-between items-center text-[11px] md:text-xs">
+                  <span class="text-zinc-500 dark:text-slate-455">{spec.label}</span>
+                  <span class="font-semibold text-zinc-700 dark:text-slate-350">{spec.value}</span>
+                </div>
+              ))}
+            </div>
+          </div>
+        </div>
+
+      </div>
+    ))}
+  </div>
+</section>
+
+<style>
+  .capabilities-card {
+    top: var(--card-top-mobile);
+  }
+  @media (min-width: 768px) {
+    .capabilities-card {
+      top: var(--card-top-desktop);
+    }
+  }
+</style>

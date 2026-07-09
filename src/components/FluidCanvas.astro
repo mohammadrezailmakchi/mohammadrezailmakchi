@@ -1,0 +1,24 @@
+---
+---
+<!-- SVG Gooey Filter Definitions -->
+<svg class="absolute inset-0 w-0 h-0 pointer-events-none opacity-0 select-none" aria-hidden="true">
+  <defs>
+    <filter id="liquid-goo">
+      <feGaussianBlur in="SourceGraphic" stdDeviation="0" result="blur" id="goo-blur" />
+      <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 35 -15" result="goo" />
+      <feBlend in="SourceGraphic" in2="goo" />
+    </filter>
+  </defs>
+</svg>
+
+<!-- Liquid Droplet Blob Container (Dynamic Contrast Droppers) -->
+<div id="liquid-blob-container" class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+  <!-- Main Blob (Stretching along Z-axis) -->
+  <div id="liquid-blob" class="w-48 h-48 bg-slate-900 dark:bg-white rounded-full scale-0 transform-gpu"></div>
+  
+  <!-- Satellites (Dynamic Contrast) -->
+  <div class="liquid-sat absolute w-12 h-12 bg-slate-900 dark:bg-white rounded-full -translate-x-24 -translate-y-12 scale-0 transform-gpu"></div>
+  <div class="liquid-sat absolute w-10 h-10 bg-slate-900 dark:bg-white rounded-full translate-x-28 translate-y-16 scale-0 transform-gpu"></div>
+  <div class="liquid-sat absolute w-14 h-14 bg-slate-900 dark:bg-white rounded-full -translate-x-16 translate-y-24 scale-0 transform-gpu"></div>
+  <div class="liquid-sat absolute w-11 h-11 bg-slate-900 dark:bg-white rounded-full translate-x-24 -translate-y-20 scale-0 transform-gpu"></div>
+</div>

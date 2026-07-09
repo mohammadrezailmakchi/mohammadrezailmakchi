@@ -1,11 +1,182 @@
 ---
-import Welcome from '../components/Welcome.astro';
+// src/pages/index.astro
 import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import Hero from '../components/Hero.astro';
+import Capabilities from '../components/Capabilities.astro';
+import ThatsNotAll from '../components/ThatsNotAll.astro';
+import GroundedNameFinale from '../components/GroundedNameFinale.astro';
 ---
 
-<Layout>
-	<Welcome />
+<Layout title="Full-Stack Founder & Product Builder" activePath="/">
+  
+  <Hero />
+
+  <Capabilities />
+
+  <!-- Section 2: Pinned Cinematic Cross-Fade Section -->
+  <section id="liquid-pinned-canvas" class="relative w-full h-screen bg-zinc-50 dark:bg-slate-950 overflow-hidden flex items-center justify-center select-none">
+    
+    <!-- That's Not All Wrapper: Content headers and Bento project cards -->
+    <div id="crossfade-content-wrapper" class="absolute inset-0 flex items-center justify-center pointer-events-none z-0">
+      <ThatsNotAll />
+    </div>
+
+    <!-- Grounded Name Finale: 2D Typography Signature -->
+    <GroundedNameFinale />
+  </section>
+
 </Layout>
+
+<style>
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(24px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  .animate-fade-in-up {
+    opacity: 0;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+
+  .animate-fade-in-up-delay {
+    opacity: 0;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) 0.15s forwards;
+  }
+
+  /* Scroll Reveal CSS */
+  .reveal-on-scroll {
+    opacity: 0;
+    will-change: transform, opacity;
+  }
+
+  /* Spring/Snap reveal animation - overshoot spring */
+  .reveal-card-spring {
+    opacity: 0;
+    transform: translateY(120px) scale(0.92);
+    will-change: transform, opacity;
+    transition: opacity 1.3s cubic-bezier(0.34, 1.56, 0.64, 1), transform 1.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+  }
+  
+  :global(.reveal-active) .reveal-card-spring {
+    opacity: 1 !important;
+    transform: translateY(0) scale(1) !important;
+  }
+</style>
+
+<script>
+  import { gsap } from 'gsap';
+  import { ScrollTrigger } from 'gsap/ScrollTrigger';
+  gsap.registerPlugin(ScrollTrigger);
+
+  let activeTimeline: gsap.core.Timeline | null = null;
+
+  const initAnimations = () => {
+    // Kill any existing ScrollTrigger or timeline instances to prevent duplication
+    if (activeTimeline) {
+      activeTimeline.kill();
+      activeTimeline = null;
+    }
+    ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+
+    // 1. Scroll Reveal Intersection Observer
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('reveal-active');
+        }
+      });
+    }, {
+      threshold: 0.15,
+      rootMargin: '0px 0px -40px 0px'
+    });
+
+    document.querySelectorAll('.reveal-on-scroll').forEach(element => {
+      observer.observe(element);
+    });
+
+    // 2. Section Cross-Fade ScrollTrigger Setup
+    const pinSection = document.getElementById('liquid-pinned-canvas');
+    const content = document.getElementById('liquid-content');
+    const squeegeeText = document.getElementById('squeegee-text');
+    const squeegee2DWrapper = document.getElementById('squeegee-2d-wrapper');
+    
+    if (!pinSection || !content || !squeegeeText || !squeegee2DWrapper) return;
+
+    // Initialize GSAP matchMedia helper to support responsive layout scales
+    const mm = gsap.matchMedia();
+
+    mm.add({
+      isDesktop: "(min-width: 768px)",
+      isMobile: "(max-width: 767px)"
+    }, (context) => {
+      const { isDesktop } = context.conditions as { isDesktop: boolean };
+
+      // Set initial states explicitly to prevent flashes of styles
+      gsap.set(content, { opacity: 1, scale: 1, pointerEvents: 'auto' });
+      gsap.set(squeegeeText, { opacity: 0 });
+      gsap.set(squeegee2DWrapper, { scale: isDesktop ? 0.95 : 0.98 });
+
+      // Create scroll-bound cross-fade timeline
+      activeTimeline = gsap.timeline({
+        scrollTrigger: {
+          trigger: pinSection,
+          start: 'top top',
+          end: isDesktop ? '+=200%' : '+=130%',
+          pin: true,
+          scrub: 1,
+          anticipatePin: 1
+        }
+      });
+
+      // Simple, elegant cross-fade: fade out Bento cards content, scale and fade in the name signature
+      activeTimeline.to(content, {
+        opacity: 0,
+        scale: 0.98,
+        pointerEvents: 'none',
+        duration: 0.5,
+        ease: 'power3.inOut'
+      })
+      .to(squeegeeText, {
+        opacity: 1,
+        duration: 0.5,
+        ease: 'power3.inOut'
+      }, '<')
+      .to(squeegee2DWrapper, {
+        scale: 1.0,
+        duration: 0.5,
+        ease: 'power3.inOut'
+      }, '<');
+
+      return () => {
+        // Cleanup
+      };
+    });
+  };
+
+  // Re-initialize animations if the user toggles the theme
+  const setupThemeObserver = () => {
+    const themeToggle = document.querySelector('.theme-toggle');
+    if (themeToggle) {
+      themeToggle.addEventListener('click', () => {
+        // Yield execution to allow layout class swap to finalize
+        setTimeout(initAnimations, 100);
+      });
+    }
+  };
+
+  // Run on page load and view transition swap
+  document.addEventListener('DOMContentLoaded', () => {
+    initAnimations();
+    setupThemeObserver();
+  });
+  document.addEventListener('astro:after-swap', () => {
+    initAnimations();
+    setupThemeObserver();
+  });
+</script>

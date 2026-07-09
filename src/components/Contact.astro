@@ -1,0 +1,286 @@
+---
+// Contact & Partnership Request Component
+import { getTranslations } from '../utils/i18n';
+
+interface Props {
+  lang?: 'en' | 'fa';
+}
+
+const { lang = 'en' } = Astro.props;
+const t = getTranslations(lang);
+
+const urgencyItems = [
+  { value: 'low', label: t.contact.urgency_low, sub: t.contact.urgency_low_sub, border: 'peer-checked:border-emerald-500/30', bg: 'peer-checked:bg-emerald-500/5', text: 'peer-checked:text-emerald-600 dark:peer-checked:text-emerald-400' },
+  { value: 'medium', label: t.contact.urgency_medium, sub: t.contact.urgency_medium_sub, border: 'peer-checked:border-sky-500/30', bg: 'peer-checked:bg-sky-500/5', text: 'peer-checked:text-sky-600 dark:peer-checked:text-sky-400' },
+  { value: 'high', label: t.contact.urgency_high, sub: t.contact.urgency_high_sub, border: 'peer-checked:border-orange-500/30', bg: 'peer-checked:bg-orange-500/5', text: 'peer-checked:text-orange-600 dark:peer-checked:text-orange-400' },
+  { value: 'critical', label: t.contact.urgency_critical, sub: t.contact.urgency_critical_sub, border: 'peer-checked:border-red-500/30', bg: 'peer-checked:bg-red-500/5', text: 'peer-checked:text-red-600 dark:peer-checked:text-red-400' }
+];
+---
+
+<section id="contact" class="w-full max-w-4xl mx-auto py-4 transition-theme animate-fade-in">
+  
+  <div class="space-y-12">
+    
+    <!-- CTA Header -->
+    <div class="text-center space-y-4 max-w-2xl mx-auto">
+      <div class="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border border-zinc-200 dark:border-slate-900 bg-zinc-150/40 dark:bg-slate-900/10 text-zinc-650 dark:text-slate-455 text-xs font-semibold uppercase tracking-wider select-none">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-655 dark:bg-indigo-400"></span>
+        {t.contact.form_tag}
+      </div>
+      <h2 class="text-3xl sm:text-5xl font-black tracking-tight text-zinc-900 dark:text-white leading-tight font-display uppercase">
+        {t.contact.form_title}
+      </h2>
+      <p class="text-zinc-550 dark:text-slate-455 text-sm sm:text-base leading-relaxed font-light">
+        {t.contact.form_desc}
+      </p>
+    </div>
+
+    <!-- Interactive Form (subtle frames, clean styling) -->
+    <div class="relative overflow-hidden backdrop-acrylic p-6 sm:p-10 rounded-3xl border border-slate-900/5 dark:border-slate-900/15 shadow-md dark:shadow-none max-w-2xl mx-auto transition-theme">
+      
+      <form 
+        id="project-request-form" 
+        class="space-y-6 relative z-10"
+        data-success-title={t.contact.toast_title_success}
+        data-success-message={t.contact.toast_msg_success}
+        data-error-title={t.contact.toast_title_error}
+        data-val-name={t.contact.toast_validation_name}
+        data-val-email={t.contact.toast_validation_email}
+        data-val-details={t.contact.toast_validation_details}
+      >
+        
+        <!-- Name & Email Inputs Grid -->
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+          <!-- Partner Name -->
+          <div class="space-y-2">
+            <label for="partner-name" class="text-[10px] font-bold text-zinc-450 dark:text-slate-500 uppercase tracking-widest block">{t.contact.label_name}</label>
+            <input
+              type="text"
+              id="partner-name"
+              name="name"
+              required
+              dir="auto"
+              placeholder={t.contact.placeholder_name}
+              class="w-full bg-white dark:bg-slate-950/80 border border-slate-900/10 dark:border-slate-900/20 rounded-xl px-4 py-3.5 text-sm text-zinc-800 dark:text-slate-200 placeholder-zinc-400 dark:placeholder-slate-600 focus:outline-none focus:border-indigo-650 dark:focus:border-indigo-500 focus:ring-1 focus:ring-indigo-650/10 transition-all duration-300 text-start"
+            />
+          </div>
+          <!-- Contact Email -->
+          <div class="space-y-2">
+            <label for="partner-email" class="text-[10px] font-bold text-zinc-455 dark:text-slate-500 uppercase tracking-widest block">{t.contact.label_email}</label>
+            <input
+              type="email"
+              id="partner-email"
+              name="email"
+              required
+              dir="auto"
+              placeholder={t.contact.placeholder_email}
+              class="w-full bg-white dark:bg-slate-950/80 border border-slate-900/10 dark:border-slate-900/20 rounded-xl px-4 py-3.5 text-sm text-zinc-800 dark:text-slate-200 placeholder-zinc-400 dark:placeholder-slate-600 focus:outline-none focus:border-indigo-650 dark:focus:border-indigo-500 focus:ring-1 focus:ring-indigo-650/10 transition-all duration-300 text-start"
+            />
+          </div>
+
+          <!-- Project Bounds -->
+          <div class="sm:col-span-2 space-y-2">
+            <label for="project-details" class="text-[10px] font-bold text-zinc-450 dark:text-slate-500 uppercase tracking-widest block">{t.contact.label_bounds}</label>
+            <textarea
+              id="project-details"
+              name="details"
+              required
+              rows="4"
+              dir="auto"
+              placeholder={t.contact.placeholder_bounds}
+              class="w-full bg-white dark:bg-slate-950/80 border border-slate-900/10 dark:border-slate-900/20 rounded-xl px-4 py-3.5 text-sm text-zinc-800 dark:text-slate-200 placeholder-zinc-400 dark:placeholder-slate-600 focus:outline-none focus:border-indigo-650 dark:focus:border-indigo-500 focus:ring-1 focus:ring-indigo-650/10 transition-all duration-300 resize-y text-start"
+            ></textarea>
+          </div>
+
+          <!-- Urgency Selection Chips -->
+          <div class="sm:col-span-2 space-y-3">
+            <label class="text-[10px] font-bold text-zinc-450 dark:text-slate-500 uppercase tracking-widest block">{t.contact.label_urgency}</label>
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5">
+              {urgencyItems.map((item) => (
+                <label class="relative flex flex-col items-center justify-center p-3 rounded-xl border border-slate-900/5 dark:border-slate-900/15 bg-white/60 dark:bg-slate-950/60 cursor-pointer transition-all duration-300 hover:border-slate-900/10 dark:hover:border-slate-800 select-none">
+                  <input type="radio" name="urgency" value={item.value} class="sr-only peer" checked={item.value === 'low'} />
+                  <div class={`absolute inset-0 rounded-xl border border-transparent ${item.border} ${item.bg} transition-all duration-300`}></div>
+                  <span class="text-xs font-semibold text-zinc-500 dark:text-slate-455 peer-checked:text-indigo-650 dark:peer-checked:text-white relative z-10">{item.label}</span>
+                  <span class="text-[9px] text-zinc-400 dark:text-slate-500 mt-0.5 relative z-10 font-normal">{item.sub}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        <!-- Budget is specified in project bounds details, set server-side default placeholder -->
+        <input type="hidden" name="budget" value="As Specified in Bounds" />
+
+        <!-- Submit Button -->
+        <button
+          type="submit"
+          id="form-submit-btn"
+          class="w-full py-4 rounded-xl font-bold text-sm tracking-wider uppercase text-white bg-zinc-900 dark:bg-white dark:text-slate-950 hover:bg-zinc-800 dark:hover:bg-zinc-100 border border-transparent cursor-pointer transition-all duration-300 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
+        >
+          <!-- Normal state -->
+          <span id="btn-text" class="flex items-center gap-2">
+            {t.contact.btn_submit}
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3"/>
+            </svg>
+          </span>
+          <!-- Loading state -->
+          <span id="btn-loader" class="hidden">
+            <svg class="animate-spin h-5 w-5 text-current" fill="none" viewBox="0 0 24 24">
+              <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+              <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+            </svg>
+          </span>
+        </button>
+
+      </form>
+
+    </div>
+  </div>
+
+  <!-- Success/Error Toast -->
+  <div
+    id="toast-notification"
+    class="fixed bottom-6 right-6 z-50 flex items-center gap-4 max-w-sm backdrop-acrylic p-4 rounded-2xl border border-zinc-200 dark:border-slate-850 shadow-2xl transition-all duration-300 opacity-0 scale-95 translate-y-4 pointer-events-none"
+  >
+    <div id="toast-icon-container" class="w-10 h-10 rounded-xl flex items-center justify-center shrink-0"></div>
+    <div class="space-y-0.5">
+      <h4 id="toast-title" class="text-sm font-bold text-zinc-900 dark:text-white">Request Sent</h4>
+      <p id="toast-message" class="text-xs text-zinc-550 dark:text-slate-455 leading-normal font-normal">Your partnership request has been saved.</p>
+    </div>
+    <button id="toast-close" class="text-zinc-400 hover:text-zinc-650 dark:text-slate-500 dark:hover:text-slate-350 cursor-pointer self-start transition-colors">
+      <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/>
+      </svg>
+    </button>
+  </div>
+
+</section>
+
+<script>
+  import { submitProjectRequest } from '../utils/db';
+
+  function setupForm() {
+    const form = document.getElementById('project-request-form') as HTMLFormElement;
+    const submitBtn = document.getElementById('form-submit-btn') as HTMLButtonElement;
+    const btnText = document.getElementById('btn-text') as HTMLElement;
+    const btnLoader = document.getElementById('btn-loader') as HTMLElement;
+
+    const toast = document.getElementById('toast-notification') as HTMLElement;
+    const toastIcon = document.getElementById('toast-icon-container') as HTMLElement;
+    const toastTitle = document.getElementById('toast-title') as HTMLElement;
+    const toastMsg = document.getElementById('toast-message') as HTMLElement;
+    const toastClose = document.getElementById('toast-close') as HTMLButtonElement;
+
+    if (!form || !submitBtn || !btnText || !btnLoader || !toast || !toastIcon || !toastTitle || !toastMsg) return;
+
+    let toastTimeout: any = null;
+
+    function showToast(success: boolean, title: string, message: string) {
+      if (toastTimeout) clearTimeout(toastTimeout);
+
+      toastTitle.textContent = title;
+      toastMsg.textContent = message;
+
+      if (success) {
+        toast.style.borderColor = 'rgba(16, 185, 129, 0.4)';
+        toastIcon.className = 'w-10 h-10 rounded-xl bg-emerald-500/10 border border-emerald-500/20 text-emerald-600 dark:text-emerald-400 flex items-center justify-center shrink-0';
+        toastIcon.innerHTML = `
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/>
+          </svg>
+        `;
+      } else {
+        toast.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+        toastIcon.className = 'w-10 h-10 rounded-xl bg-red-500/10 border border-red-500/20 text-red-650 dark:text-red-400 flex items-center justify-center shrink-0';
+        toastIcon.innerHTML = `
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+        `;
+      }
+
+      // Show toast
+      toast.classList.remove('opacity-0', 'scale-95', 'translate-y-4', 'pointer-events-none');
+      toast.classList.add('opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto');
+
+      toastTimeout = setTimeout(() => {
+        hideToast();
+      }, 3500);
+    }
+
+    function hideToast() {
+      toast.classList.remove('opacity-100', 'scale-100', 'translate-y-0', 'pointer-events-auto');
+      toast.classList.add('opacity-0', 'scale-95', 'translate-y-4', 'pointer-events-none');
+    }
+
+    if (toastClose) {
+      toastClose.addEventListener('click', hideToast);
+    }
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      // Collect form values
+      const formData = new FormData(form);
+      const name = (formData.get('name') as string || '').trim();
+      const email = (formData.get('email') as string || '').trim();
+      const details = (formData.get('details') as string || '').trim();
+      const budget = (formData.get('budget') as string || '').trim();
+      const urgency = formData.get('urgency') as any;
+
+      // Read validation text from dataset
+      const successTitle = form.getAttribute('data-success-title') || 'Submission Successful';
+      const successMessage = form.getAttribute('data-success-message') || '';
+      const errorTitle = form.getAttribute('data-error-title') || 'Validation Error';
+      const valName = form.getAttribute('data-val-name') || 'Partner Name must be at least 2 characters.';
+      const valEmail = form.getAttribute('data-val-email') || 'Please provide a valid contact email address.';
+      const valDetails = form.getAttribute('data-val-details') || 'Project Bounds must outline the scope with at least 10 characters.';
+
+      // 1. Client-side Name validation
+      if (name.length < 2) {
+        showToast(false, errorTitle, valName);
+        return;
+      }
+
+      // 2. Client-side Email validation
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        showToast(false, errorTitle, valEmail);
+        return;
+      }
+
+      // 3. Client-side Project Bounds validation
+      if (details.length < 10) {
+        showToast(false, errorTitle, valDetails);
+        return;
+      }
+
+      // Transition to loading state
+      submitBtn.disabled = true;
+      btnText.classList.add('hidden');
+      btnLoader.classList.remove('hidden');
+
+      try {
+        const res = await submitProjectRequest({ name, email, details, budget, urgency });
+
+        if (res.success) {
+          showToast(true, successTitle, res.message || successMessage);
+          form.reset();
+        } else {
+          showToast(false, errorTitle, res.message);
+        }
+      } catch (err: any) {
+        showToast(false, errorTitle, err.message || 'An unexpected networking issue occurred.');
+      } finally {
+        submitBtn.disabled = false;
+        btnText.classList.remove('hidden');
+        btnLoader.classList.add('hidden');
+      }
+    });
+  }
+
+  // Setup form on DOMContentLoaded and View Transitions swaps
+  document.addEventListener('DOMContentLoaded', setupForm);
+  document.addEventListener('astro:after-swap', setupForm);
+</script>

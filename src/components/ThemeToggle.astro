@@ -1,0 +1,58 @@
+---
+// ThemeToggle.astro: Modular theme switcher component
+---
+
+<button
+  aria-label="Toggle light/dark theme"
+  class="theme-toggle relative p-2.5 rounded-full border border-zinc-200 bg-zinc-50/50 hover:bg-zinc-100 hover:scale-105 active:scale-95 text-zinc-700 dark:border-slate-800/80 dark:bg-slate-900/40 dark:hover:bg-slate-900/80 dark:text-slate-350 shadow-sm hover:shadow dark:shadow-none transition-all duration-300 cursor-pointer flex items-center justify-center"
+>
+  <!-- Sun Icon (visible in dark mode) -->
+  <svg class="hidden dark:block w-4 h-4 fill-none stroke-amber-400 stroke-[1.8]" viewBox="0 0 24 24">
+    <circle cx="12" cy="12" r="4" class="fill-amber-400/10"></circle>
+    <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41-1.41M19.07 4.93l-1.41-1.41"></path>
+  </svg>
+  <!-- Moon Icon (visible in light mode) -->
+  <svg class="block dark:hidden w-4 h-4 fill-none stroke-zinc-900 stroke-[1.8]" viewBox="0 0 24 24">
+    <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+  </svg>
+</button>
+
+<script>
+  function setupThemeToggle() {
+    const toggles = document.querySelectorAll('.theme-toggle');
+    toggles.forEach(toggle => {
+      if (toggle.getAttribute('data-theme-initialized')) return;
+      toggle.setAttribute('data-theme-initialized', 'true');
+
+      toggle.addEventListener('click', () => {
+        // Toggle theme classes and update localStorage
+        const toggleClasses = () => {
+          const isDark = document.documentElement.classList.contains('dark');
+          if (isDark) {
+            document.documentElement.classList.remove('dark');
+            localStorage.setItem('theme', 'light');
+          } else {
+            document.documentElement.classList.add('dark');
+            localStorage.setItem('theme', 'dark');
+          }
+        };
+
+        // Native view transitions support check
+        if (!(document as any).startViewTransition) {
+          toggleClasses();
+          return;
+        }
+
+        (document as any).startViewTransition(() => {
+          toggleClasses();
+        });
+      });
+    });
+  }
+
+  // Initial setup
+  setupThemeToggle();
+
+  // Re-run setup on View Transitions page swap
+  document.addEventListener('astro:after-swap', setupThemeToggle);
+</script>

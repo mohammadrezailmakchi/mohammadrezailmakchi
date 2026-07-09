@@ -1,0 +1,88 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { getTranslations } from '../utils/i18n';
+
+const lang = 'en';
+const t = getTranslations(lang);
+---
+
+<Layout title="About the Founder | Full-Stack Product Builder" activePath="/about" lang={lang} description="Narrative profile detailing software engineering philosophy, infrastructure design, and client project intake.">
+  <main class="relative z-10 w-full min-h-screen flex flex-col items-center px-8 sm:px-16 md:px-24 pt-24 md:pt-28 pb-24">
+    
+    <!-- Top Narrative Section -->
+    <div class="w-full max-w-4xl space-y-16 animate-fade-in mb-32">
+      
+      <!-- Mini Header Tag -->
+      <div class="inline-flex items-center gap-2.5 px-4 py-1.5 rounded-full border border-zinc-200 dark:border-slate-900 bg-zinc-100/50 dark:bg-slate-900/10 text-zinc-550 dark:text-slate-450 text-[10px] font-bold uppercase tracking-widest select-none">
+        <span class="w-1.5 h-1.5 rounded-full bg-indigo-650 dark:bg-indigo-400"></span>
+        {t.about.tag}
+      </div>
+
+      <div class="space-y-6">
+        <h1 class="text-4xl sm:text-6xl font-light tracking-wide text-zinc-900 dark:text-white leading-[1.1] font-display">
+          {t.about.title}<br/>
+          <span class="font-normal text-indigo-600 dark:text-indigo-400">{t.about.title_accent}</span>
+        </h1>
+        <p class="text-zinc-500 dark:text-slate-355 text-base sm:text-lg leading-relaxed font-light">
+          {t.about.paragraph}
+        </p>
+      </div>
+
+      <!-- Core Philosophy Narrative Columns -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-12 pt-12 border-t border-zinc-200/80 dark:border-slate-900/60">
+        <div class="space-y-4">
+          <h3 class="text-lg font-light text-zinc-900 dark:text-white font-display">{t.about.col1_title}</h3>
+          <p class="text-zinc-500 dark:text-slate-450 text-sm leading-relaxed font-light">
+            {t.about.col1_desc}
+          </p>
+        </div>
+        <div class="space-y-4">
+          <h3 class="text-lg font-light text-zinc-900 dark:text-white font-display">{t.about.col2_title}</h3>
+          <p class="text-zinc-500 dark:text-slate-450 text-sm leading-relaxed font-light">
+            {t.about.col2_desc}
+          </p>
+        </div>
+      </div>
+
+      <!-- Product Execution Pipeline -->
+      <div class="space-y-8 pt-16 border-t border-zinc-200/80 dark:border-slate-900/60">
+        <h2 class="text-[10px] font-bold text-zinc-400 dark:text-slate-555 uppercase tracking-widest">
+          {t.about.framework_title}
+        </h2>
+        
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-8">
+          <div class="space-y-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-indigo-650 dark:text-indigo-400">{t.about.step1_tag}</span>
+            <h4 class="text-sm font-semibold text-zinc-900 dark:text-white">{t.about.step1_title}</h4>
+            <p class="text-xs text-zinc-500 dark:text-slate-450 leading-relaxed font-light">{t.about.step1_desc}</p>
+          </div>
+          <div class="space-y-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-cyan-650 dark:text-cyan-400">{t.about.step2_tag}</span>
+            <h4 class="text-sm font-semibold text-zinc-900 dark:text-white">{t.about.step2_title}</h4>
+            <p class="text-xs text-zinc-500 dark:text-slate-455 leading-relaxed font-light">{t.about.step2_desc}</p>
+          </div>
+          <div class="space-y-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-purple-650 dark:text-purple-400">{t.about.step3_tag}</span>
+            <h4 class="text-sm font-semibold text-zinc-900 dark:text-white">{t.about.step3_title}</h4>
+            <p class="text-xs text-zinc-500 dark:text-slate-455 leading-relaxed font-light">{t.about.step3_desc}</p>
+          </div>
+          <div class="space-y-3">
+            <span class="text-[10px] font-bold uppercase tracking-wider text-emerald-650 dark:text-emerald-400">{t.about.step4_tag}</span>
+            <h4 class="text-sm font-semibold text-zinc-900 dark:text-white">{t.about.step4_title}</h4>
+            <p class="text-xs text-zinc-500 dark:text-slate-455 leading-relaxed font-light">{t.about.step4_desc}</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+</Layout>
+
+<style>
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(8px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .animate-fade-in {
+    animation: fadeIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+</style>

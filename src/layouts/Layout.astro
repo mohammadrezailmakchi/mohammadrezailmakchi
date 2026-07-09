@@ -1,23 +1,128 @@
+---
+import '../styles/global.css';
+import Navbar from '../components/Navbar.astro';
+import GlobalFooter from '../components/GlobalFooter.astro';
+
+interface Props {
+	title?: string;
+	description?: string;
+	activePath?: string;
+	lang?: 'en' | 'fa';
+}
+
+const { 
+	title = "Full-Stack Founder Portfolio Hub", 
+	description = "Technical showcase, project analysis, and systems intake platform of a Solo Full-Stack Engineer.",
+	activePath = '/',
+	lang = 'en'
+} = Astro.props;
+
+const dir = lang === 'fa' ? 'rtl' : 'ltr';
+---
+
 <!doctype html>
-<html lang="en">
+<html lang={lang} dir={dir} class:list={[
+	"scroll-smooth [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none]",
+	{ "font-persian": lang === "fa" }
+]}>
 	<head>
 		<meta charset="UTF-8" />
-		<meta name="viewport" content="width=device-width" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro Basics</title>
+		
+		<!-- SEO Meta Tags -->
+		<title>{title}</title>
+		<meta name="description" content={description} />
+		<meta name="robots" content="index, follow" />
+		
+		<!-- Open Graph / Facebook -->
+		<meta property="og:type" content="website" />
+		<meta property="og:title" content={title} />
+		<meta property="og:description" content={description} />
+		
+		<!-- Twitter -->
+		<meta property="twitter:card" content="summary_large_image" />
+		<meta property="twitter:title" content={title} />
+		<meta property="twitter:description" content={description} />
+
+		<!-- Google Fonts: Outfit (Display: Light/Futuristic), Inter (Sans: Clean), Vazirmatn (Persian) -->
+		<link rel="preconnect" href="https://fonts.googleapis.com">
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+		<link href="https://fonts.googleapis.com/css2?family=Inter:wght@200;300;450;500;650&family=Outfit:wght@200;300;400;500;600&family=Vazirmatn:wght@200;400;650&display=swap" rel="stylesheet">
+
+		<!-- Inline theme script to run immediately before paint (prevents theme flash) -->
+		<script is:inline>
+			const theme = (() => {
+				if (typeof localStorage !== 'undefined' && localStorage.getItem('theme')) {
+					return localStorage.getItem('theme');
+				}
+				if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+					return 'dark';
+				}
+				return 'light';
+			})();
+		
+			if (theme === 'light') {
+				document.documentElement.classList.remove('dark');
+			} else {
+				document.documentElement.classList.add('dark');
+			}
+			window.localStorage.setItem('theme', theme);
+		</script>
+
+		<!-- Inline script to block rendering during language transition -->
+		<script is:inline>
+			if (typeof sessionStorage !== 'undefined' && sessionStorage.getItem('lang-switch-active') === 'true') {
+				document.documentElement.classList.add('lang-switching');
+			}
+		</script>
+		<style>
+			html.lang-switching body {
+				opacity: 0 !important;
+				filter: blur(8px) !important;
+				will-change: filter, opacity;
+			}
+		</style>
 	</head>
-	<body>
+	<body class="grid-bg-dots transition-theme min-h-screen overflow-x-hidden text-zinc-650 dark:text-slate-400 selection:bg-indigo-500/20 selection:text-indigo-600 dark:selection:text-indigo-200 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden [-ms-overflow-style:none]">
+		<Navbar activePath={activePath} lang={lang} />
+		
+		<!-- Layout main slot -->
 		<slot />
+
+		<GlobalFooter lang={lang} />
+
+		<script>
+			import { gsap } from 'gsap';
+
+			function handleLangTransition() {
+				if (document.documentElement.classList.contains('lang-switching')) {
+					// Force hardware acceleration layer promotion
+					document.body.style.willChange = 'filter, opacity';
+
+					gsap.fromTo(document.body,
+						{ opacity: 0, filter: 'blur(8px)' },
+						{
+							opacity: 1,
+							filter: 'blur(0px)',
+							duration: 0.250, // 250ms
+							ease: 'power2.inOut',
+							onComplete: () => {
+								document.body.style.willChange = '';
+								document.documentElement.classList.remove('lang-switching');
+								sessionStorage.removeItem('lang-switch-active');
+							}
+						}
+					);
+				}
+			}
+
+			// Run on initial load
+			handleLangTransition();
+			// Run on View Transitions swaps
+			document.addEventListener('astro:after-swap', handleLangTransition);
+		</script>
 	</body>
 </html>
-
-<style>
-	html,
-	body {
-		margin: 0;
-		width: 100%;
-		height: 100%;
-	}
-</style>
