@@ -1,6 +1,7 @@
 ---
 // src/components/ThatsNotAll.astro
 import { getTranslations } from '../utils/i18n';
+import { withBase } from '../utils/baseUrl';
 
 interface Props {
   lang?: 'en' | 'fa';
@@ -31,7 +32,7 @@ const t = getTranslations(lang);
   <div id="liquid-grid" class="grid grid-cols-2 lg:grid-cols-4 gap-3 md:gap-6 w-full mt-6 sm:mt-16 max-w-5xl mx-auto">
     
     <!-- Card 1: Projects Showcase -->
-    <a href={lang === 'fa' ? '/fa/projects' : '/projects'} class="group backdrop-acrylic p-4 md:p-6 rounded-2xl md:rounded-3xl border border-zinc-200 dark:border-slate-800/80 hover:border-indigo-500/40 dark:hover:border-indigo-400/40 transition-all duration-300 flex flex-col justify-between h-36 sm:h-44 md:h-56 text-start">
+    <a href={withBase(lang === 'fa' ? '/fa/projects' : '/projects')} class="group backdrop-acrylic p-4 md:p-6 rounded-2xl md:rounded-3xl border border-zinc-200 dark:border-slate-800/80 hover:border-indigo-500/40 dark:hover:border-indigo-400/40 transition-all duration-300 flex flex-col justify-between h-36 sm:h-44 md:h-56 text-start">
       <div class="space-y-1 sm:space-y-3">
         <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-indigo-650 dark:text-indigo-450">{t.thatsNotAll.card1_tag}</span>
         <h3 class="text-sm sm:text-base md:text-lg font-bold text-zinc-900 dark:text-white uppercase tracking-tight">{t.thatsNotAll.card1_title}</h3>
@@ -41,7 +42,7 @@ const t = getTranslations(lang);
     </a>
 
     <!-- Card 2: About Biography -->
-    <a href={lang === 'fa' ? '/fa/about' : '/about'} class="group backdrop-acrylic p-4 md:p-6 rounded-2xl md:rounded-3xl border border-zinc-200 dark:border-slate-800/80 hover:border-purple-500/40 dark:hover:border-purple-400/40 transition-all duration-300 flex flex-col justify-between h-36 sm:h-44 md:h-56 text-start">
+    <a href={withBase(lang === 'fa' ? '/fa/about' : '/about')} class="group backdrop-acrylic p-4 md:p-6 rounded-2xl md:rounded-3xl border border-zinc-200 dark:border-slate-800/80 hover:border-purple-500/40 dark:hover:border-purple-400/40 transition-all duration-300 flex flex-col justify-between h-36 sm:h-44 md:h-56 text-start">
       <div class="space-y-1 sm:space-y-3">
         <span class="text-[8px] sm:text-[9px] font-bold uppercase tracking-wider text-purple-650 dark:text-purple-450">{t.thatsNotAll.card2_tag}</span>
         <h3 class="text-sm sm:text-base md:text-lg font-bold text-zinc-900 dark:text-white uppercase tracking-tight">{t.thatsNotAll.card2_title}</h3>

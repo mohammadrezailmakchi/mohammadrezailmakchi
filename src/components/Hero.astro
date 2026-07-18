@@ -1,5 +1,6 @@
 ---
 import { getTranslations } from '../utils/i18n';
+import { withBase } from '../utils/baseUrl';
 
 interface Props {
   lang?: 'en' | 'fa';
@@ -37,13 +38,13 @@ const t = getTranslations(lang);
         <!-- Call to Action Buttons -->
         <div class="flex flex-wrap gap-4 pt-2">
           <a
-            href={lang === 'fa' ? '/fa/projects' : '/projects'}
+            href={withBase(lang === 'fa' ? '/fa/projects' : '/projects')}
             class="px-7 py-3.5 bg-indigo-650 text-white hover:bg-indigo-750 dark:bg-indigo-500 dark:text-white dark:hover:bg-indigo-400 font-bold text-xs uppercase tracking-widest rounded-full hover:scale-105 active:scale-95 transition-all duration-300 shadow-md shadow-indigo-600/10 dark:shadow-none cursor-pointer"
           >
             {t.hero.cta_projects}
           </a>
           <a
-            href={lang === 'fa' ? '/fa/about' : '/about'}
+            href={withBase(lang === 'fa' ? '/fa/about' : '/about')}
             class="px-7 py-3.5 border border-zinc-350 text-zinc-700 hover:bg-zinc-100 hover:text-zinc-900 dark:border-slate-800 dark:text-slate-300 dark:hover:bg-slate-900/40 dark:hover:text-white font-bold text-xs uppercase tracking-widest rounded-full hover:scale-105 active:scale-95 transition-all duration-300 cursor-pointer"
           >
             {t.hero.cta_about}

@@ -2,6 +2,7 @@
 // src/pages/projects.astro
 import Layout from '../layouts/Layout.astro';
 import { getTranslations } from '../utils/i18n';
+import { withBase } from '../utils/baseUrl';
 
 const lang = 'en';
 const t = getTranslations(lang);
@@ -382,7 +383,7 @@ const categories = lang === 'fa' ? [
                 {project.status}
               </span>
               {project.liveUrl !== '#' && (
-                <a href={lang === 'fa' ? `/fa/projects/${project.id}` : `/projects/${project.id}`} class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 dark:text-slate-500 dark:hover:text-white transition-colors duration-300 flex items-center gap-1 group/link">
+                <a href={withBase(lang === 'fa' ? `/fa/projects/${project.id}` : `/projects/${project.id}`)} class="text-[10px] font-bold uppercase tracking-widest text-zinc-400 hover:text-zinc-950 dark:text-slate-500 dark:hover:text-white transition-colors duration-300 flex items-center gap-1 group/link">
                   {t.projects.inspect_metrics}
                   <svg class="w-2.5 h-2.5 transform group-hover/link:translate-x-0.5 transition-transform" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M9 5l7 7-7 7" />
